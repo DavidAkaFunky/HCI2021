@@ -64,7 +64,16 @@ function draw()
     fill(color(255,255,255));
     textAlign(LEFT);
     text("Trial " + (current_trial + 1) + " of " + trials.length, 50, 20);
-    
+
+    /*
+    var x = parseInt(LEFT_PADDING) + parseInt((0 % 4) * (TARGET_SIZE + TARGET_PADDING) + MARGIN)+55;
+    var y = parseInt(TOP_PADDING) + parseInt(Math.floor(0 / 4) * (TARGET_SIZE + TARGET_PADDING) + MARGIN)-50;
+    textAlign(CENTER);
+    circle(x+10,y-5,TARGET_SIZE-30);
+    circle(x+TARGET_SIZE+50,y-5,TARGET_SIZE-30);
+    text("Current Ball:      "+"Next Ball:   ",x,y);
+    */
+
     // Draw all 16 targets
 	for (var i = 0; i < 16; i++) drawTarget(i);
   }
@@ -206,7 +215,7 @@ function drawTarget(i)
     fill(color(0,0,255));
 
   else
-    fill(color(255));    
+    fill(color(119,119,119));     // Delta-E = 50.0344 (118 doesn't work)
 
   circle(target.x, target.y, target.w);
 }
