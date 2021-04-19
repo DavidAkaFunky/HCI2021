@@ -71,7 +71,7 @@ function draw()
 }
 
 function checkValue(value){
-  if (value == 0)
+  if (value == -2)
     return "---";
   if (value == -1)
     return "MISSED";
@@ -104,7 +104,7 @@ function printAndSavePerformance()
   text("Fitts Index of Performance", width/2, 260);
   // Print Fitts IDS (one per target, -1 if failed selection)
   // 
-  fitts_IDs.push(0);
+  fitts_IDs.push(-2);
   for (var i = 0; i < clicks.length - 1; ++i){
     if (clicks[i][2]){
       let x_dist = clicks[i+1][0] - clicks[i][0];
