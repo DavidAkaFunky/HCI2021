@@ -22,3 +22,24 @@ canvas
   font-family: 'Arial';
   color: white;
 }
+
+#target_text
+{
+  font-size: 14px;
+  font-family: 'Arial';
+  color: white;
+}
+
+#next_text
+{
+  font-size: 14px;
+  font-family: 'Arial';
+  color: white;
+}
+
+#double_text
+{
+  font-size: 14px;
+  font-family: 'Arial';
+  color: white;
+}

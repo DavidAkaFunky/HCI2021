@@ -33,8 +33,30 @@ function drawUserIDScreen()
   display_size_label = createDiv("Display size in inches");   // create label
   display_size_label.id('input');
   display_size_label.position(10, display_size_pos_y_offset);
+
+  // 3. Message to user
+  message_target = createDiv("Target:");
+  message_next = createDiv("Next Target:");
+  message_double = createDiv("Double Click:");
+  message_target.id('target_text');
+  message_next.id('next_text');
+  message_double.id('double_text');
+  message_target.position(10, display_size_pos_y_offset+40);
+  message_next.position(10, display_size_pos_y_offset+80);
+  message_double.position(10,display_size_pos_y_offset+120);
+
+  fill(color(0,255,0));
+  circle(70,display_size_pos_y_offset+48,25)
+
+  fill(color(0,128,0));
+  circle(100,display_size_pos_y_offset+88,25)
+
+  fill(color(0,128,0));
+  circle(110,display_size_pos_y_offset+128,25)
+  fill(color(0,255,0));
+  circle(110,display_size_pos_y_offset+128,15)
   
-  // 3. Start button
+  // 4. Start button
   start_button = createButton('START');
   start_button.mouseReleased(startTest);
   start_button.position(width/2 - start_button.size().width/2, height/2 - start_button.size().height/2);
@@ -78,6 +100,9 @@ function startTest()
     display_size_form.remove();
     display_size_label.remove();
     start_button.remove();  
+    message_target.remove();
+    message_next.remove();
+    message_double.remove();
 
     // Goes fullscreen and starts test
     fullscreen(!fullscreen());
