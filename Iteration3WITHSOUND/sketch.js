@@ -169,7 +169,7 @@ let MISS;
 //let HIT;
 function preload(){
   soundFormats("mp3","ogg");
-  MISS = loadSound("death");
+  MISS = loadSound("sounds/death");
   //HIT = loadSound("ahegao");
 }
 
