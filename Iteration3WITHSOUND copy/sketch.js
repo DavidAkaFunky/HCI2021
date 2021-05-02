@@ -44,6 +44,27 @@ class Target
 // Runs once at the start
 function setup()
 {
+
+  var firebaseConfiguration = 
+      {
+        apiKey: "AIzaSyAyGv9D_xvMsbzNvGAeeYhgU7-d_saE98c",
+        authDomain: "bakeoff2-6c6af.firebaseapp.com",
+        projectId: "bakeoff2-6c6af",
+        storageBucket: "bakeoff2-6c6af.appspot.com",
+        messagingSenderId: "846331435898",
+        appId: "1:846331435898:web:4670617d5d1372b95714c3",
+        measurementId: "G-1ECGNEDJB4"
+      };
+
+  if (!BAKE_OFF_DAY) {
+    firebase.initializeApp(firebaseConfiguration);
+    firebase.analytics();
+    console.log(firebase);
+
+    database_1 = firebase.database();
+  }
+
+  
   createCanvas(700, 500);    // window size in px before we go into fullScreen()
   frameRate(60);             // frame rate (DO NOT CHANGE!)
   
@@ -68,15 +89,33 @@ function draw()
 
     // Draw all 16 targets
 	  for (var i = 0; i < 16; i++) drawTarget(i);
+
+    // Hover
+    target = getTargetBounds(trials[current_trial]);
+    let collide = pointCircle(target);
+    if(collide){
+      noFill()
+      stroke(255,255,255)
+      circle(target.x,target.y,target.w + 20)
+      noStroke()
+    }
     
     // Draw line
     next_target = getTargetBounds(trials[current_trial]);
-    strokeWeight(3);
+    strokeWeight(5);
     stroke(color('white'));
     line(mouseX,mouseY,next_target.x, next_target.y);
     noStroke();
   }
 }
+function pointCircle(target) {
+  let d = dist(mouseX, mouseY, target.x, target.y);
+   
+  if(d < target.w/2) {
+    return true; 
+  }
+   return false;
+ }
 
 function checkValue(value){
   if (value == -2)
@@ -130,7 +169,7 @@ function printAndSavePerformance()
   for (var i = 0; i < fitts_IDs.length/2 ; ++i){
     let value1 = checkValue(fitts_IDs[i]);
     let value2 = checkValue(fitts_IDs[fitts_IDs.length/2 + i]);
-    text("Target " + (i+1) + ": " + value1 + "                      Target " + (fitts_IDs.length/2 + i + 1) + ": " + value2, width/2, 280 + 20*i);
+    text("Target " + (i+1) + ": " + value1 + "                                        Target " + (fitts_IDs.length/2 + i + 1) + ": " + value2, width/2, 280 + 20*i);
   }
   // Saves results (DO NOT CHANGE!)
   let attempt_data = 

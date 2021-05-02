@@ -1,0 +1,60 @@
+GXX [Primeiro Nome] [Ultimo Nome] terminei GYY
+GXX [Primeiro Nome] [Ultimo Nome]. Não consegui avaliar o Grupo XX porque...
+GXX [Primeiro Nome] [Ultimo Nome] acabei todos os testes
+
+
+
+O nosso bake-off começou com cada elemento do grupo a desenhar individualmente um storyboard. 
+Após varias trocas de ideias mais conhecido como "BrainStorming", convergimos para um storyboard final que detalhava os objetivos e os passos envolvidos na realização de cada tarefa.
+
+Daqui nasceu o nosso primeiro prototipo de baixa fidelidade, uma traducao quase direta do que tinhamos previamente idealizado. 
+Para testar os PBFs foram utilizados os metódos explicados nas aulas, nomeadamente o "Wizard of Oz", durante o qual encorajamos os utilizadores a terem uma atitude de "Think Aloud" para conseguirmos obter o maximo feedback possivel.
+
+Ao avaliar as dificuldades e confusoes que os utilizadores sentiram e ouvindo também as suas opiniões, criamos um relatorio de resultados para facilitar a correção de todos os problemas.
+
+Os testes do 1º PBF foram realizados com 6 utilizadores e como era de esperar tinham bastantes falhas:
+
+>Os graficos no menu principal não eram funcionais apenas demonstrativos o que causou confusao
+>e Tanto o botao dos eletrodomesticos como o dos alertas estavam demasiado pequenos
+Estes factos levaram-nos a criar um novo menu principal, em que a informação estava mais separada e organizada.
+
+>A alteracao da data do grafico requeria multiplos passos em diferentes sitio do ecra pelo que simplificamos para estar tudo localizado num unico botão.
+Esta alteração tambem levou à mudanca do botao da comparacao com a cidade para mais perto do grafico
+
+>Durante os testes percebemos que tinhamos a ideia errada do conceito de comparar com a media cidade pelo que a 4ª tarefa não era possivel de completar, tivemos portanto, de repensar a forma como estavam a dispor a informação adicionando uma aba para as despesas
+
+No 2º PBF implementamos estas melhoriais e fomos mais uma fez testar a aplicacao juntos dos utilizadores. Decidimos trazer alguns dos participantes anteriores para perceber se tinhamos corrigido os problemas mas tambem novos colegas e amigos, cerca de 7 no total.
+
+Os testes deste prototipo correram significativamente melhor não dispensando alguns ajustes:
+
+>A clarificação dos botoes "Diario", "Mensal" e "Anual" continuava a causar confusao pelo que optamos por alterar para "Dia" "Mes" e "Ano"
+
+>O botão da cidade foi aumentado para dar mais visibilidade após multiplos utilizador nao se aperceberem de que era um botão
+
+>A comparacao com a media da cidade passou a ser feita atraves de uma tabela para além do grafico sobreposto para facilitar a leitura do mesmo.
+
+>Foi removida a opção de selecionar um periodo durante a criacao de um alerta visto que nao era claro o seu objetivo
+
+
+A 3ª e ultima iteracao aparentava estar estável e pronta para transitar para um prototipo de media fidelidade. Não dispensamos claro de mais uma rodada de testes desta vez com 5 novos utilizadores sem qualquer familiaridade com a app. Estes conseguiram realizar todas as 4 tarefas sem problemas pelo que demos por concluido a fase da prototipagem em papel transitando para o figma.
+
+
+Sendo assim, este é o nosso prototipo de media fidelidade final.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+O nosso bake-off começou com a leitura do código base fornecido pelos docentes.
+
+
+
+
+
+
+
+
+
+
+
+
