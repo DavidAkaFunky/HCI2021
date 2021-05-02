@@ -209,7 +209,7 @@ let MISS;
 function preload(){
   soundFormats("mp3","ogg");
   MISS = loadSound("sounds/death");
-  MISS.setVolume(0.4)
+  MISS.setVolume(0.3)
   HIT = loadSound("sounds/minecraft");
 }
 
