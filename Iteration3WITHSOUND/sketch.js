@@ -121,7 +121,7 @@ function printAndSavePerformance()
 
       console.log(targets[i+1][0], targets[i+1][1],clicks[i][0], clicks[i][1]);
 
-      value = log((sqrt(distancia)/TARGET_SIZE)+1)/log(2)
+      value = log((distancia/TARGET_SIZE)+1)/log(2)
       fitts_IDs.push(round(value,3));
     }
     else
