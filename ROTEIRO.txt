@@ -38,14 +38,42 @@ Os testes deste prototipo correram significativamente melhor não dispensando al
 
 A 3ª e ultima iteracao aparentava estar estável e pronta para transitar para um prototipo de media fidelidade. Não dispensamos claro de mais uma rodada de testes desta vez com 5 novos utilizadores sem qualquer familiaridade com a app. Estes conseguiram realizar todas as 4 tarefas sem problemas pelo que demos por concluido a fase da prototipagem em papel transitando para o figma.
 
-
 Sendo assim, este é o nosso prototipo de media fidelidade final.
 
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-O nosso bake-off começou com a leitura do código base fornecido pelos docentes.
+O nosso bake-off começou com a leitura do código base fornecido pelos docentes. A programação em p5 não era o foco deste projeto mas decidimos dedicar algum tempo a aprender esta nova linguagem antes de partir para qualquer alteracoes reais.
+
+Ao analisar a interface incial decidimos começar por alterar as cores de forma a tornar os alvos mais evidentes. Pintamos de verde o alvo atual e de azul o alvo seguinte. Para diminuir a relevancia dos restantes alvos diminuimos a sua cor de forma a ter um delta-e o mais perto possivel de 50.
+Decidimos tambem implementar já o calculo dos indices de dificuldade de Fitts.
+
+Recorrendo a testes formativos testamos esta primeira iterecacao junto de 12 utilizadores conseguimos obter os seguintes valores: (Mostrar a tabela)
+
+Para além destes dados quantitativos procuramos tambem obter feedback dos utilizadores , em especial, o porque haver uma descrepancia dos valores brutos para os valores com penalizacoes. Concluimos que tinhamos ignorado o principio de que nao somos os utilizadores e nao identificamos bem cada um dos alvos, logo nao era possivel distingir qual o alvo atual do proximo causando erros a selecionar o alvo correto.
+
+
+Na segunda iteração, resolvemos o problema anteriormente mencionado adicionando não só uma legenda inicial mas tambem alteramos a cor dos target para terem a mesma cor mas com contrastes diferentes. Introduzimos tambem uma solucao para o duplo click que consistia em juntar ambas as cores num mesmo target.
+
+Realizando mais uma rodada de testes com 10 utilizadores em que obtemos os seguintes valores: (Mostrar a tabela)
+
+Para a terceira iteracao decidimos adicionar uma legenda e voltar ao esquema de cores anterior pois consideramos que era mais facil de distinguir entre os dois alvos. Foi tambem adicionado uma linha desde o cursor do utilizadores até ao alvo a selecionar para facilitar a detecao.
+Ficamos interessados em introduzir som à interface mas estavamos incertos se seria realmente um beneficio ou nao e foi assim que decidimos realizar testes intergrupos, separamos num sistema A sem som, B som para erros e C com som tanto para erros como para acertos.
+
+Os testes foram feitos tendo em conta os efeitos da ordem de utilizacao e utilizamos counter-balancing para diminuir estes.
+Obtemos os seguintes valores: (Mostrar Tabela) de onde concluimos que o sistema C, com som tanto em erros como acertos era mais benefico para a interface.
+
+
+Para a quarta e ultima iteracao adicionamos apenas um pequeno circulo (..)
+
+
+programacao em p5.js
+Testas A/B/C -> testes intergrupo  counter balancing
+Indice de Fitts
+testes formativos  ->  Avaliacao Sumativa
+5 utilizadores -> 85%
+
 
 
 
