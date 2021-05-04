@@ -44,28 +44,41 @@ Sendo assim, este é o nosso prototipo de media fidelidade final.
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-O nosso bake-off começou com a leitura do código base fornecido pelos docentes. A programação em p5 não era o foco deste projeto mas decidimos dedicar algum tempo a aprender esta nova linguagem antes de partir para qualquer alteracoes reais.
+O nosso bake-off começou com a leitura do código base fornecido pelos docentes. A programação em p5 não era o foco deste projeto mas escolhemos dedicar algum tempo a aprender esta nova linguagem antes de partir para quaisquer alteracoes reais.
 
-Ao analisar a interface incial decidimos começar por alterar as cores de forma a tornar os alvos mais evidentes. Pintamos de verde o alvo atual e de azul o alvo seguinte. Para diminuir a relevancia dos restantes alvos diminuimos a sua cor de forma a ter um delta-e o mais perto possivel de 50.
+(1ºIteracao)
+Ao analisar a interface incial decidimos começar por alterar as cores, de forma a tornar os alvos mais evidentes. Pintamos de verde o alvo atual e de azul o alvo seguinte. 
+Para diminuir a relevancia dos restantes alvos alteramos a sua cor até obter um delta-e o mais perto possivel de 50.
 Decidimos tambem implementar já o calculo dos indices de dificuldade de Fitts.
 
-Recorrendo a testes formativos testamos esta primeira iterecacao junto de 12 utilizadores conseguimos obter os seguintes valores: (Mostrar a tabela)
+Recorrendo a testes formativos testamos a primeira iteracao junto de 12 utilizadores e conseguimos obter os seguintes valores: 
+Para além destes dados quantitativos procuramos tambem obter feedback dos utilizadores , em especial, o porque haver uma discrepancia dos valores brutos para os valores com penalizacoes. 
+Concluimos assim que ignoramos um principio chave, o que diz que, nao somos nos os utilizadores. Perante os dois alvos coloridos não era possivel distinguir qual o alvo a selecionar do alvo seguinte.
 
-Para além destes dados quantitativos procuramos tambem obter feedback dos utilizadores , em especial, o porque haver uma descrepancia dos valores brutos para os valores com penalizacoes. Concluimos que tinhamos ignorado o principio de que nao somos os utilizadores e nao identificamos bem cada um dos alvos, logo nao era possivel distingir qual o alvo atual do proximo causando erros a selecionar o alvo correto.
+(2ºIteracao)
+Na segunda iteração, resolvemos o problema anteriormente mencionado adicionando não só uma legenda inicial mas tambem alterando a cor dos alvos para terem a mesma cor mas com intensidades diferentes. Introduzimos tambem uma solucao para o duplo click que consistia em juntar ambas as cores no mesmo alvo.
+Realizamos mais uma rodada de testes com 10 utilizadores em que obtemos os seguintes valores: (Mostrar a tabela)
+Apesar de ser uma boa média, o desvio padrão continuava alto havendo grandes discrepancias nos valores obtidos.
+
+(3ºIteracao)
+Para a terceira iteracao decidimos voltar ao esquema de cores anterior depois de ouvir feedback de alguns utilizadores que reportaram nao conseguir distinguir o alvo atual do proximo.
+Foi tambem adicionada uma linha desde o cursor do utilizador até ao alvo a selecionar para facilitar a visualização.
+Ficamos interessados em introduzir som à interface mas estavamos incertos se seria realmente um beneficio ou nao.
+Foi assim que decidimos realizar testes intergrupos, separamos num sistema A sem som, B som para erros e C com som tanto para erros como para acertos.
+Os testes foram feitos com o counter-balancing em mente para diminuir os efeitos da ordem de utilizacao.
+Obtemos os seguintes valores: (Mostrar Tabela) de onde concluimos que o sistema C, com som tanto em erros como em acertos era o mais benefico para a interface.
+
+Ao analisar os dados é obvio que a media de seleção subiu, no entanto este aumento é facilmente justificado pelo facto de que os valores para a terceira iteracao foram obtidos fora do contexto de aula, sendo que alguns nao estavam familiarizados com o projeto.
+Por outro lado o desvio padrao desceu significativamente, indicado que os valores estavam a tornar-se mais constantes.
+
+(4ºIteracao)
+Para a quarta e ultima iteracao aumentamos a espessura da linha e adicionamos um pequeno circulo que aparece quando o utilizador tem o rato sobre o alvo correto.
+Abordamos mais um conjunto de 8 utilizadores de onde obtemos os seguintes valores:(Mostrar tabel)
+Como ja tinhamos uma boa média de seleção e um desvio baixo decidimos ficar com esta solução final, nao querendo encher demasiado a interface com elementos desnecessarios que pudessem desviar a atencao do utilizador.
 
 
-Na segunda iteração, resolvemos o problema anteriormente mencionado adicionando não só uma legenda inicial mas tambem alteramos a cor dos target para terem a mesma cor mas com contrastes diferentes. Introduzimos tambem uma solucao para o duplo click que consistia em juntar ambas as cores num mesmo target.
-
-Realizando mais uma rodada de testes com 10 utilizadores em que obtemos os seguintes valores: (Mostrar a tabela)
-
-Para a terceira iteracao decidimos adicionar uma legenda e voltar ao esquema de cores anterior pois consideramos que era mais facil de distinguir entre os dois alvos. Foi tambem adicionado uma linha desde o cursor do utilizadores até ao alvo a selecionar para facilitar a detecao.
-Ficamos interessados em introduzir som à interface mas estavamos incertos se seria realmente um beneficio ou nao e foi assim que decidimos realizar testes intergrupos, separamos num sistema A sem som, B som para erros e C com som tanto para erros como para acertos.
-
-Os testes foram feitos tendo em conta os efeitos da ordem de utilizacao e utilizamos counter-balancing para diminuir estes.
-Obtemos os seguintes valores: (Mostrar Tabela) de onde concluimos que o sistema C, com som tanto em erros como acertos era mais benefico para a interface.
 
 
-Para a quarta e ultima iteracao adicionamos apenas um pequeno circulo (..)
 
 
 programacao em p5.js
