@@ -59,6 +59,7 @@ Concluimos assim que ignoramos um principio chave, o que diz que, nao somos nos 
 Na segunda iteração, resolvemos o problema anteriormente mencionado adicionando não só uma legenda inicial mas tambem alterando a cor dos alvos para terem a mesma cor mas com intensidades diferentes. Introduzimos tambem uma solucao para o duplo click que consistia em juntar ambas as cores no mesmo alvo.
 Realizamos mais uma rodada de testes com 10 utilizadores em que obtemos os seguintes valores: (Mostrar a tabela)
 Apesar de ser uma boa média, o desvio padrão continuava alto havendo grandes discrepancias nos valores obtidos.
+Ao rescrever o codigo que calculava os indices de dificuldade, introduzimos um bug que resultou no calculo errado dos resultados. Este erro foi corrigo logo na terceira iteraçao.
 
 (3ºIteracao)
 Para a terceira iteracao decidimos voltar ao esquema de cores anterior depois de ouvir feedback de alguns utilizadores que reportaram nao conseguir distinguir o alvo atual do proximo.
