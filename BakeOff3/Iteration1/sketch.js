@@ -47,7 +47,7 @@ let current_letter = 'a';      // current char being displayed on our basic 2D k
 let status = 0;
 let lines = [[["a","b","c"],["j","k","l"],["s","t","u"]],
              [["d","e","f"],["m","n","o"],["v","w","x"]],
-             [["g","h","i"],["p","q","r"],["y","z"," "]]];
+             [["g","h","i"],["p","q","r"],["y","z"]]];
 
 // Runs once before the setup() and loads our data (images, phrases)
 function preload()
@@ -143,7 +143,7 @@ function drawMainMenu(){
   text("s t u", width/2 - 2.0*PPCM + 10.0*PPCM/3.0, height/2 - 1.1*PPCM/3.0);
   text("v w x", width/2 - 2.0*PPCM + 10.0*PPCM/3.0, height/2 + 1.4*PPCM/3.0);
   text("y z", width/2 - 2.0*PPCM + 10.0*PPCM/3.0, height/2 + 3.9*PPCM/3.0);
-  text("<=", width/2 - PPCM, height/2 + 5.9*PPCM/3.0)
+  text("DEL", width/2 - PPCM, height/2 + 5.9*PPCM/3.0)
   text("SPACE", width/2 + PPCM, height/2 + 5.9*PPCM/3.0)
 }
 
@@ -159,7 +159,15 @@ function drawSecondaryMenu(value){
       text(lines[i][value-1][j],width/2 - 2.0*PPCM + (j+0.5)*4.0*PPCM/3.0, height/2 + (i*2.5-1.1)*PPCM/3.0);
     }
   }
-
+  textAlign(CENTER); 
+  textFont("Arial", 14);
+  let symbols = ["BACK", "SPACE", "DEL"];
+  for(let j = 0; j<3; ++j){
+    fill(150+25*j);
+    rect(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + 7.5*PPCM/3.0, 4.0*PPCM/3.0, 0.5*PPCM);
+    fill(0);
+    text(symbols[j],width/2 - 2.0*PPCM + (j+0.5)*4.0*PPCM/3.0, height/2 + 5.7*PPCM/3.0);
+  }
 }
 
 // Evoked when the mouse button was pressed
@@ -186,10 +194,42 @@ function mousePressed()
         {
           status = 3;
         }
+        else if(mouseClickWithin(width/2 - 2.0*PPCM, height/2 + 1.5*PPCM, 2.0*PPCM, 0.5*PPCM))
+        {
+          currently_typed = currently_typed.substring(0, currently_typed.length - 1);
+        }
+        else if(mouseClickWithin(width/2, height/2 + 1.5*PPCM, 2.0*PPCM, 0.5*PPCM))
+        {
+          currently_typed += " "
+        }
       }
       else
       {
-        
+        for(let i = 0; i<3; ++i){
+          for(let j = 0; j<3; ++j){
+            if(!(i == 2 && status == 3 & j == 2) && mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + i*2.5*PPCM/3.0, 4.0*PPCM/3.0, 2.5*PPCM/3.0))
+            {
+              currently_typed += lines[i][status-1][j];
+              return;
+            }
+          }
+        }
+        for(var j = 0; j<3; ++j){
+          if(mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + 7.5*PPCM/3.0, 4.0*PPCM/3.0, 0.5*PPCM))
+            break;
+        }
+        if(j==0)
+        {
+          status = 0;
+        }
+        else if(j==1)
+        {
+          currently_typed += " ";
+        }
+        else if(j==2)
+        {
+          currently_typed = currently_typed.substring(0, currently_typed.length - 1);
+        }
       }
     
       /*
