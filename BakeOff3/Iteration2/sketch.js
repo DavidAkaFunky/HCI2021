@@ -79,7 +79,7 @@ function setup()
   shuffle(phrases, true);   // randomize the order of the phrases list (N=501)
   target_phrase = phrases[current_trial];
 
-  words = loadStrings('count_1w.txt')
+  words = loadStrings('data/count_1w.txt')
 
   drawUserIDScreen();       // draws the user input screen (student number and display size)
 }
