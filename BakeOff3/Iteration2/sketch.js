@@ -45,10 +45,12 @@ let current_letter = 'a';      // current char being displayed on our basic 2D k
 
 // Main Menu and Sub Menus
 let status = 0;
-let lines = [[["a","b","c"],["j","k","l"],["s","t","u"]],
-             [["d","e","f"],["m","n","o"],["v","w","x"]],
-             [["g","h","i"],["p","q","r"],["y","z"]]];
+let lines = [[["a","b","c"],["d","e","f"]],
+             [["g","h","i"], ["j","k","l","m"]],
+             [["n","o","p"], ["q","r","s"]],
+             [["t","u","v","w"], ["x","y","z"]]];
 let current_word = "";
+let result = [];
 
 // To track CPS
 let phrase_size = 0;
@@ -66,6 +68,17 @@ function preload()
   // Loads UI elements for our basic keyboard
   leftArrow = loadImage("data/left.png");
   rightArrow = loadImage("data/right.png");
+
+  // Autocomplete
+  words = loadStrings('data/words.txt')
+
+  // Load Main Menu and Sub M
+  mainMenu = loadImage("data/MainMenu.png");
+  subMenu1 = loadImage("data/subMenu1.png");
+  subMenu2 = loadImage("data/subMenu2.png");
+  subMenu3 = loadImage("data/subMenu3.png");
+  subMenu4 = loadImage("data/subMenu4.png");
+  subMenu5 = loadImage("data/subMenu5.png");
 }
 
 let words;
@@ -79,8 +92,6 @@ function setup()
   shuffle(phrases, true);   // randomize the order of the phrases list (N=501)
   target_phrase = phrases[current_trial];
 
-  words = loadStrings('data/count_1w.txt')
-
   drawUserIDScreen();       // draws the user input screen (student number and display size)
 }
 
@@ -92,6 +103,7 @@ function draw()
     noCursor();                // hides the cursor to simulate the 'fat finger'
     
     drawArmAndWatch();         // draws arm and watch background
+
     writeTargetAndEntered();   // writes the target and entered phrases above the watch
     drawACCEPT();              // draws the 'ACCEPT' button that submits a phrase and completes a trial
     
@@ -99,10 +111,10 @@ function draw()
     noStroke();
     fill(125);
     rect(width/2 - 2.0*PPCM, height/2 - 2.0*PPCM, 4.0*PPCM, 1.0*PPCM);
-    textAlign(CENTER); 
-    textFont("Arial", 16);
-    fill(0);
-    text("NOT INTERACTIVE", width/2, height/2 - 1.3 * PPCM);
+    //textAlign(CENTER); 
+    //textFont("Arial", 16);
+    //fill(0);
+    //text("NOT INTERACTIVE", width/2, height/2 - 1.3 * PPCM);
 
     // Draws the touch input area (4x3cm) -- DO NOT CHANGE SIZE!
     stroke(0, 255, 0);
@@ -118,63 +130,43 @@ function draw()
     else
     {
       drawSecondaryMenu(status);
+      if (status == 5){
+        drawSuggestions();
+      }
     }
-    
+    drawAutoComplete();
     drawFatFinger();        // draws the finger that simulates the 'fat finger' problem
   }
 }
 
-function drawMainMenu(){
-  noStroke();
-  fill(125);
-  rect(width/2 - 2.0*PPCM, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 2.5*PPCM);
-  fill(150);
-  rect(width/2 - 2.0*PPCM + 4.0*PPCM/3.0, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 2.5*PPCM);
-  fill(175);
-  rect(width/2 - 2.0*PPCM + 8.0*PPCM/3.0, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 2.5*PPCM);
-
-  fill(200);
-  rect(width/2 - 2.0*PPCM, height/2 + 1.5*PPCM, 2.0*PPCM, 0.5*PPCM);
-  fill(225);
-  rect(width/2, height/2 + 1.5*PPCM, 2.0*PPCM, 0.5*PPCM);
-
-  textAlign(CENTER); 
-  textFont("Arial", 18);
-  fill(0);
-  text("a b c", width/2 - 2.0*PPCM + 2.0*PPCM/3.0, height/2 - 1.1*PPCM/3.0);
-  text("d e f", width/2 - 2.0*PPCM + 2.0*PPCM/3.0, height/2 + 1.4*PPCM/3.0);
-  text("g h i", width/2 - 2.0*PPCM + 2.0*PPCM/3.0, height/2 + 3.9*PPCM/3.0);
-  text("j k l", width/2, height/2 - 1.1*PPCM/3.0);
-  text("m n o", width/2, height/2 + 1.4*PPCM/3.0);
-  text("p q r", width/2, height/2 + 3.9*PPCM/3.0);
-  text("s t u", width/2 - 2.0*PPCM + 10.0*PPCM/3.0, height/2 - 1.1*PPCM/3.0);
-  text("v w x", width/2 - 2.0*PPCM + 10.0*PPCM/3.0, height/2 + 1.4*PPCM/3.0);
-  text("y z", width/2 - 2.0*PPCM + 10.0*PPCM/3.0, height/2 + 3.9*PPCM/3.0);
-  text("DEL", width/2 - PPCM, height/2 + 5.9*PPCM/3.0)
-  text("SPACE", width/2 + PPCM, height/2 + 5.9*PPCM/3.0)
+function drawMainMenu()
+{
+  imageMode(CENTER);
+  image(mainMenu,width/2,height/2,4*PPCM,4*PPCM) 
 }
 
-function drawSecondaryMenu(value){
-  noStroke();
-  for(let i = 0; i<3; ++i){
-    for(let j = 0; j<3; ++j){
-      fill(125);
-      rect(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + i*2.5*PPCM/3.0, 4.0*PPCM/3.0, 2.5*PPCM/3.0);
-      textAlign(CENTER); 
-      textFont("Arial", 18);
-      fill(0);
-      if(lines[i][value-1][j] != null)
-        text(lines[i][value-1][j],width/2 - 2.0*PPCM + (j+0.5)*4.0*PPCM/3.0, height/2 + (i*2.5-1.1)*PPCM/3.0);
-    }
-  }
-  textAlign(CENTER); 
-  textFont("Arial", 14);
-  let symbols = ["BACK", "SPACE", "DEL"];
-  for(let j = 0; j<3; ++j){
-    fill(150+25*j);
-    rect(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + 7.5*PPCM/3.0, 4.0*PPCM/3.0, 0.5*PPCM);
-    fill(0);
-    text(symbols[j],width/2 - 2.0*PPCM + (j+0.5)*4.0*PPCM/3.0, height/2 + 5.7*PPCM/3.0);
+function drawSecondaryMenu(value)
+{
+  imageMode(CENTER);
+  switch(value)
+  {
+    case 1:
+      image(subMenu1,width/2,height/2,4*PPCM,4*PPCM);
+      break;
+    case 2:
+      image(subMenu2,width/2,height/2,4*PPCM,4*PPCM);
+      break;
+    case 3:
+      image(subMenu3,width/2,height/2,4*PPCM,4*PPCM);
+      break;
+    case 4:
+      image(subMenu4,width/2,height/2,4*PPCM,4*PPCM);
+      break;
+    case 5:
+      image(subMenu5,width/2,height/2,4*PPCM,4*PPCM);
+      break;
+    default:
+      console.log("You shouldn't be here");
   }
 }
 
@@ -182,109 +174,192 @@ function drawSecondaryMenu(value){
  * PROBLEM: nao podemos por no fim do mousePressed porque ha partes que dao
  * return, solucao kinda wack é por em todos os sitios que faz return
  */
-function findSuggestion(){
-  let result;
-  for (let i in words) {
-    if (words[i].startsWith(current_word)) {
-      result = words[i];
-      break;
+function findSuggestion()
+{
+  let count = 0;
+  result = [];
+  if (current_word == "")
+    return;
+  for (let i in words) 
+  {
+    if (words[i].startsWith(current_word)) 
+    {
+      result.push(words[i]);
+      if((++count) == 3)
+        return;
     }
   }
-  if(typeof result != undefined)
-    console.log(result)
+}
+
+function drawAutoComplete(){
+  textAlign(CENTER); 
+  textFont("Arial", 16);
+  fill(0);
+  for (let i = 0; i < result.length; ++i)
+  {
+    if (i == 1)
+      text(result[1], width/2, height/2 - 1.1 * PPCM);
+    else
+      text(result[i], width/2 + (i-1)*PPCM, height/2 - 1.6 * PPCM);
+  }
+}
+
+function drawSuggestions(){
+  textAlign(LEFT); 
+  textFont("Arial", 25);
+  fill(0);
+  for (let i = 0; i < result.length; ++i)
+  {
+    text(result[i], width/2 - PPCM, height/2 - 0.3*PPCM + i*PPCM);
+  }
 }
 
 // Evoked when the mouse button was pressed
 function mousePressed()
 {
-  findSuggestion()
   // Only look for mouse presses during the actual test
   if (draw_finger_arm)
   {                   
     // Check if mouse click happened within the touch input area
-    if(mouseClickWithin(width/2 - 2.0*PPCM, height/2 - 1.0*PPCM, 4.0*PPCM, 3.0*PPCM))  
-    {    
+    if(mouseClickWithin(width/2 - 2.0*PPCM, height/2 - PPCM, 4.0*PPCM, 3.0*PPCM))  
+    { 
+      let letter;   
       // MAIN MENU
-      if (status == 0)
-      {
-        if (mouseClickWithin(width/2 - 2.0*PPCM, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 2.5*PPCM))
-        {
-          status = 1;
-        }
-        else if (mouseClickWithin(width/2 - 2.0*PPCM + 4.0*PPCM/3.0, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 2.5*PPCM))
-        {
-          status = 2;
-        }
-        else if(mouseClickWithin(width/2 - 2.0*PPCM+ 8.0*PPCM/3.0, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 2.5*PPCM))
-        {
-          status = 3;
-        }
-        else if(mouseClickWithin(width/2 - 2.0*PPCM, height/2 + 1.5*PPCM, 2.0*PPCM, 0.5*PPCM))
-        {
-          currently_typed = currently_typed.substring(0, currently_typed.length - 1);
-          current_word = current_word.substring(0, current_word.length - 1);
-        }
-        else if(mouseClickWithin(width/2, height/2 + 1.5*PPCM, 2.0*PPCM, 0.5*PPCM))
-        {
-          currently_typed += " ";
-          current_word = "";
-        }
-      }
-      else
-      {
-        for(let i = 0; i<3; ++i){
-          for(let j = 0; j<3; ++j){
-            if(!(i == 2 && status == 3 & j == 2) && mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + i*2.5*PPCM/3.0, 4.0*PPCM/3.0, 2.5*PPCM/3.0))
+      switch(status){
+        case 0:
+          if (mouseClickWithin(width/2 - 2.0*PPCM, height/2 - PPCM, 1.5*PPCM, 1.5*PPCM))
+          {
+            status = 1;
+          }
+          else if(mouseClickWithin(width/2 - 0.5*PPCM, height/2 - PPCM,  1.5*PPCM, 1.5*PPCM))
+          {
+            status = 2;
+          }
+          else if (mouseClickWithin(width/2 - 2.0*PPCM, height/2 + 0.5*PPCM, 1.5*PPCM, 1.5*PPCM))
+          {
+            status = 3;
+          }
+          else if(mouseClickWithin(width/2 - 0.5*PPCM, height/2 + 0.5*PPCM, 1.5*PPCM, 1.5*PPCM))
+          {
+            status = 4;
+          }
+          else if(mouseClickWithin(width/2 + 1.0*PPCM, height/2 - PPCM, PPCM, PPCM))
+          {
+            currently_typed = currently_typed.substring(0, currently_typed.length - 1);
+            if(current_word != "")
+              current_word = current_word.substring(0, current_word.length - 1);
+              //Dance
+            else
             {
-              currently_typed += lines[i][status-1][j];
-              current_word += lines[i][status-1][j];
+              previous_word = split(currently_typed," ");
+              current_word = previous_word[previous_word.length-1];
+            }
+            findSuggestion();
+          }
+          else if(mouseClickWithin(width/2 + 1.0*PPCM, height/2, PPCM, PPCM))
+          {
+            currently_typed += " ";
+            current_word = "";
+          }
+          else if(mouseClickWithin(width/2 + 1.0*PPCM, height/2 + 1.0*PPCM, PPCM, PPCM)){
+            status = 5;
+          }
+          break;
+
+        case 1: case 3:
+          for(let i = 0; i<2; ++i) 
+          {
+            for(let j = 0; j<3; ++j) 
+            {
+              // pos x , pos y , altura , largura
+              if(mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + i*1.5*PPCM, 4.0*PPCM/3.0, 1.5*PPCM))
+              {
+                letter = lines[status-1][i][j];
+                currently_typed += letter;
+                current_word += letter;
+                findSuggestion();
+                status = 0;
+                return;
+              }
+            }
+          }
+          break;
+
+        case 2:
+          for(let j = 0; j<3; ++j)
+          {
+            if(mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM, 4.0*PPCM/3.0, 1.5*PPCM))
+            {
+              letter = lines[status-1][0][j];
+              currently_typed += letter;
+              current_word += letter;
+              findSuggestion();
+              status = 0;
               return;
             }
           }
-        }
-        for(var j = 0; j<3; ++j){
-          if(mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 - 1.0*PPCM + 7.5*PPCM/3.0, 4.0*PPCM/3.0, 0.5*PPCM))
-            break;
-        }
-        if(j==0)
-        {
-          status = 0;
-        }
-        else if(j==1)
-        {
-          currently_typed += " ";
-          //Note: user might want to go back to last word
-          current_word = "";
-        }
-        else if(j==2)
-        {
-          currently_typed = currently_typed.substring(0, currently_typed.length - 1);
-          current_word = current_word.substring(0, current_word.length - 1);
-        }
+          for(let j = 0; j<4; ++j)
+          {
+            if(mouseClickWithin(width/2 - 2.0*PPCM + j*PPCM, height/2 + 0.5*PPCM, PPCM, 1.5*PPCM))
+            {
+              letter = lines[status-1][1][j];
+              currently_typed += letter;
+              current_word += letter;
+              findSuggestion();
+              status = 0;
+              return;
+            }
+          }
+          break;
+
+        case 4:
+          for(let j = 0; j<4; ++j)
+          {
+            if(mouseClickWithin(width/2 - 2.0*PPCM + j*PPCM, height/2 - 1.0*PPCM, PPCM, 1.5*PPCM))
+            {
+              console.log(j)
+              letter = lines[status-1][0][j];
+              currently_typed += letter;
+              current_word += letter;
+              findSuggestion();
+              status = 0;
+              return;
+            }
+          }
+          for(let j = 0; j<3; ++j)
+          {
+            if(mouseClickWithin(width/2 - 2.0*PPCM + j*4.0*PPCM/3.0, height/2 + 0.5*PPCM, 4.0*PPCM/3.0, 1.5*PPCM))
+            {
+              letter = lines[status-1][1][j];
+              currently_typed += letter;
+              current_word += letter;
+              findSuggestion();
+              status = 0;
+              return;
+            }
+          }
+          break;
+
+        case 5:
+          for(let i = 0; i < 3; ++i)
+          { 
+            if(mouseClickWithin(width/2 - 2.0*PPCM, height/2 - 1.0*PPCM + i*PPCM, 4.0*PPCM, PPCM))
+            {
+              if(i < result.length){
+                currently_typed = currently_typed.substring(0,currently_typed.length-current_word.length);
+                currently_typed += result[i] + " ";
+                current_word = "";
+                result = [];
+              }
+              status = 0;
+              return;
+            }
+          }
+          break;
+
+        default:
+          console.log("RUN OR SUFFER THE CONSEQUENCES");
       }
-    
-      /*
-      // Check if mouse click was on left arrow (2D keyboard)
-      if (mouseClickWithin(width/2 - ARROW_SIZE, height/2, ARROW_SIZE, ARROW_SIZE))
-      {
-        current_letter = getPreviousChar(current_letter);
-        if (current_letter.charCodeAt(0) < '_'.charCodeAt(0)) current_letter = 'z';  // wrap around to z
-      }
-      // Check if mouse click was on right arrow (2D keyboard)
-      else if (mouseClickWithin(width/2, height/2, ARROW_SIZE, ARROW_SIZE))
-      {
-        current_letter = getNextChar(current_letter);
-        if (current_letter.charCodeAt(0) > 'z'.charCodeAt(0)) current_letter = '_'; // wrap back to space (i.e., the underscore)
-      }
-      else
-      {
-        // Click in whitespace indicates a character input (2D keyboard)
-        if (current_letter == '_') currently_typed += " ";                          // if underscore, consider that a space bar
-        else if (current_letter == '`' && currently_typed.length > 0)               // if `, treat that as delete
-          currently_typed = currently_typed.substring(0, currently_typed.length - 1);
-        else if (current_letter != '`') currently_typed += current_letter;          // if not any of the above cases, add the current letter to the entered phrase
-      }
-      */
     }
     
     // Check if mouse click happened within 'ACCEPT' 
@@ -347,6 +422,7 @@ function startSecondAttempt()
   
   current_letter       = 'a';
   current_word         = "";
+  result               = [];
   
   // Show the watch and keyboard again
   second_attempt_button.remove();
