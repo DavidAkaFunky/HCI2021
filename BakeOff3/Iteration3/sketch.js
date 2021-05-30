@@ -251,7 +251,7 @@ function mousePressed()
       }
       // MAIN MENU
       else{
-        if(mouseClickWithin(width/2, height/2 + PPCM, 2*PPCM, PPCM))
+        if(results.length == 1 && mouseClickWithin(width/2, height/2 + PPCM, 2*PPCM, PPCM))
           {
             currently_typed = currently_typed.substring(0,currently_typed.length-current_word.length);
             currently_typed += result[0] + " ";
