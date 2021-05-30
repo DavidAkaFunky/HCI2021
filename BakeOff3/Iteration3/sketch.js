@@ -198,7 +198,7 @@ function findSuggestion()
   //  return;
   for (let i in words) 
   {
-    if (words[i].startsWith(current_word)) 
+    if (words[i].startsWith(current_word) && words[i] != current_word) 
     {
       result.push(words[i]);
       if((++count) == 2)
