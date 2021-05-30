@@ -48,6 +48,7 @@ let status = 0;
 let lines = [["a","b","c"],["d","e","f"],["g","h","i"],["j","k","l",],["m","n","o"],[["p","q"],["r","s"]],["t","u","v"],[["w","x"],["y","z"]]];
 let current_word = "";
 let result = [];
+let letter;
 
 // To track CPS
 let phrase_size = 0;
@@ -229,8 +230,7 @@ function mousePressed()
   {                   
     // Check if mouse click happened within the touch input area
     if(mouseClickWithin(width/2 - 2.0*PPCM, height/2 - PPCM, 4.0*PPCM, 3.0*PPCM))  
-    { 
-      let letter;
+    {
       if(mouseClickWithin(width/2 + PPCM, height/2 - PPCM, PPCM, PPCM))
       {
         currently_typed = currently_typed.substring(0, currently_typed.length - 1);
@@ -384,6 +384,7 @@ function startSecondAttempt()
   result               = [];
   
   // Show the watch and keyboard again
+  findSuggestion();
   second_attempt_button.remove();
   draw_finger_arm      = true;
   attempt_start_time   = millis();  
