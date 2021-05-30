@@ -251,17 +251,28 @@ function mousePressed()
       }
       // MAIN MENU
       else{
-        for(let i = 0; i < 2; ++i)
-          if(mouseClickWithin(width/2 + i*PPCM, height/2 + PPCM, PPCM, PPCM))
+        if(mouseClickWithin(width/2, height/2 + PPCM, 2*PPCM, PPCM))
           {
             currently_typed = currently_typed.substring(0,currently_typed.length-current_word.length);
-            currently_typed += result[i] + " ";
+            currently_typed += result[0] + " ";
             current_word = "";
             result = [];
             status = 0;
             findSuggestion();
             return;
           }
+        else if (results.length == 2)
+          for(let i = 0; i < 2; ++i)
+            if(mouseClickWithin(width/2 + i*PPCM, height/2 + PPCM, PPCM, PPCM))
+            {
+              currently_typed = currently_typed.substring(0,currently_typed.length-current_word.length);
+              currently_typed += result[i] + " ";
+              current_word = "";
+              result = [];
+              status = 0;
+              findSuggestion();
+              return;
+            }
         switch(status){
           case 0:
             if (mouseClickWithin(width/2 - 2*PPCM, height/2 - PPCM, PPCM, PPCM))

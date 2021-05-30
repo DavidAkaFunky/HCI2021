@@ -38,6 +38,10 @@ function drawUserIDScreen()
   start_button = createButton('START');
   start_button.mouseReleased(startTest);
   start_button.position(width/2 - start_button.size().width/2, height/2 - start_button.size().height/2);
+
+  message = createDiv("Tip: If there's only 1 autocomplete option, choose either of the autocomplete buttons!");
+  message.id('message');
+  message.position(10, display_size_pos_y_offset+40);
 }
 
 // Verifies if the student ID is a number, and within an acceptable range
@@ -77,7 +81,8 @@ function startTest()
     student_ID_label.remove();
     display_size_form.remove();
     display_size_label.remove();
-    start_button.remove();  
+    start_button.remove();
+    message.remove();  
 
     // Goes fullscreen and starts test
     fullscreen(!fullscreen());

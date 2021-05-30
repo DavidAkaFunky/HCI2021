@@ -19,3 +19,10 @@ canvas {
   font-family: 'Arial';
   color: white;
 }
+
+#message
+{
+  font-size: 14px;
+  font-family: 'Arial';
+  color: white;
+}
