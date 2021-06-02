@@ -202,7 +202,8 @@ function findSuggestion()
     {
       result.push(words[i]);
       if((++count) == 2)
-        return;
+        return;   
+        
     }
   }
 }
