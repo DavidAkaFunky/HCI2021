@@ -1,0 +1,130 @@
+GXX [Primeiro Nome] [Ultimo Nome] terminei GYY
+GXX [Primeiro Nome] [Ultimo Nome]. Não consegui avaliar o Grupo XX porque...
+GXX [Primeiro Nome] [Ultimo Nome] acabei todos os testes
+
+
+
+O nosso bake-off começou com cada elemento do grupo a desenhar individualmente um storyboard. 
+Após varias trocas de ideias mais conhecido como "BrainStorming", convergimos para um storyboard final que detalhava os objetivos e os passos envolvidos na realização de cada tarefa.
+
+Daqui nasceu o nosso primeiro prototipo de baixa fidelidade, uma traducao quase direta do que tinhamos previamente idealizado. 
+Para testar os PBFs foram utilizados os metódos explicados nas aulas, nomeadamente o "Wizard of Oz", durante o qual encorajamos os utilizadores a terem uma atitude de "Think Aloud" para conseguirmos obter o maximo feedback possivel.
+
+Ao avaliar as dificuldades e confusoes que os utilizadores sentiram e ouvindo também as suas opiniões, criamos um relatorio de resultados para facilitar a correção de todos os problemas.
+
+Os testes do 1º PBF foram realizados com 6 utilizadores e como era de esperar tinham bastantes falhas:
+
+>Os graficos no menu principal não eram funcionais apenas demonstrativos o que causou confusao
+>e Tanto o botao dos eletrodomesticos como o dos alertas estavam demasiado pequenos
+Estes factos levaram-nos a criar um novo menu principal, em que a informação estava mais separada e organizada.
+
+>A alteracao da data do grafico requeria multiplos passos em diferentes sitio do ecra pelo que simplificamos para estar tudo localizado num unico botão.
+Esta alteração tambem levou à mudanca do botao da comparacao com a cidade para mais perto do grafico
+
+>Durante os testes percebemos que tinhamos a ideia errada do conceito de comparar com a media cidade pelo que a 4ª tarefa não era possivel de completar, tivemos portanto, de repensar a forma como estavam a dispor a informação adicionando uma aba para as despesas
+
+No 2º PBF implementamos estas melhoriais e fomos mais uma fez testar a aplicacao juntos dos utilizadores. Decidimos trazer alguns dos participantes anteriores para perceber se tinhamos corrigido os problemas mas tambem novos colegas e amigos, cerca de 7 no total.
+
+Os testes deste prototipo correram significativamente melhor não dispensando alguns ajustes:
+
+>A clarificação dos botoes "Diario", "Mensal" e "Anual" continuava a causar confusao pelo que optamos por alterar para "Dia" "Mes" e "Ano"
+
+>O botão da cidade foi aumentado para dar mais visibilidade após multiplos utilizador nao se aperceberem de que era um botão
+
+>A comparacao com a media da cidade passou a ser feita atraves de uma tabela para além do grafico sobreposto para facilitar a leitura do mesmo.
+
+>Foi removida a opção de selecionar um periodo durante a criacao de um alerta visto que nao era claro o seu objetivo
+
+
+A 3ª e ultima iteracao aparentava estar estável e pronta para transitar para um prototipo de media fidelidade. Não dispensamos claro de mais uma rodada de testes desta vez com 5 novos utilizadores sem qualquer familiaridade com a app. Estes conseguiram realizar todas as 4 tarefas sem problemas pelo que demos por concluido a fase da prototipagem em papel transitando para o figma.
+
+Sendo assim, este é o nosso prototipo de media fidelidade final.
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+O nosso bake-off começou com a leitura do código base fornecido pelos docentes. A programação em p5 não era o foco deste projeto mas escolhemos dedicar algum tempo a aprender esta nova linguagem antes de partir para quaisquer alteracoes reais.
+
+(1ºIteracao)
+Ao analisar a interface incial decidimos começar por alterar as cores, de forma a tornar os alvos mais evidentes. Pintamos de verde o alvo atual e de azul o alvo seguinte. 
+Para diminuir a relevancia dos restantes alvos alteramos a sua cor até obter um delta-e o mais perto possivel de 50.
+Decidimos tambem implementar já o calculo dos indices de dificuldade de Fitts.
+
+Recorrendo a testes formativos testamos a primeira iteracao junto de 12 utilizadores e conseguimos obter os seguintes valores: 
+Para além destes dados quantitativos procuramos tambem obter feedback dos utilizadores , em especial, o porque haver uma discrepancia dos valores brutos para os valores com penalizacoes. 
+Concluimos assim que ignoramos um principio chave, o que diz que, nao somos nos os utilizadores. Perante os dois alvos coloridos não era possivel distinguir qual o alvo a selecionar do alvo seguinte.
+
+(2ºIteracao)
+Na segunda iteração, resolvemos o problema anteriormente mencionado adicionando não só uma legenda inicial mas tambem alterando a cor dos alvos para terem a mesma cor mas com intensidades diferentes. Introduzimos tambem uma solucao para o duplo click que consistia em juntar ambas as cores no mesmo alvo.
+Realizamos mais uma rodada de testes com 10 utilizadores em que obtemos os seguintes valores: (Mostrar a tabela)
+Apesar de ser uma boa média, o desvio padrão continuava alto havendo grandes discrepancias nos valores obtidos.
+Ao rescrever o codigo que calculava os indices de dificuldade, introduzimos um bug que resultou no calculo errado dos resultados. Este erro foi corrigo logo na terceira iteraçao.
+
+(3ºIteracao)
+Para a terceira iteracao decidimos voltar ao esquema de cores anterior depois de ouvir feedback de alguns utilizadores que reportaram nao conseguir distinguir o alvo atual do proximo.
+Foi tambem adicionada uma linha desde o cursor do utilizador até ao alvo a selecionar para facilitar a visualização.
+Ficamos interessados em introduzir som à interface mas estavamos incertos se seria realmente um beneficio ou nao.
+Foi assim que decidimos realizar testes intergrupos, separamos num sistema A sem som, B som para erros e C com som tanto para erros como para acertos.
+Os testes foram feitos com o counter-balancing em mente para diminuir os efeitos da ordem de utilizacao.
+Obtemos os seguintes valores: (Mostrar Tabela) de onde concluimos que o sistema C, com som tanto em erros como em acertos era o mais benefico para a interface.
+
+Ao analisar os dados é obvio que a media de seleção subiu, no entanto este aumento é facilmente justificado pelo facto de que os valores para a terceira iteracao foram obtidos fora do contexto de aula, sendo que alguns nao estavam familiarizados com o projeto.
+Por outro lado o desvio padrao desceu significativamente, indicado que os valores estavam a tornar-se mais constantes.
+
+(4ºIteracao)
+Para a quarta e ultima iteracao aumentamos a espessura da linha e adicionamos um pequeno circulo que aparece quando o utilizador tem o rato sobre o alvo correto.
+Abordamos mais um conjunto de 8 utilizadores de onde obtemos os seguintes valores:(Mostrar tabel)
+Como ja tinhamos uma boa média de seleção e um desvio baixo decidimos ficar com esta solução final, nao querendo encher demasiado a interface com elementos desnecessarios que pudessem desviar a atencao do utilizador.
+
+
+
+programacao em p5.js
+Testas A/B/C -> testes intergrupo  counter balancing
+Indice de Fitts
+testes formativos  ->  Avaliacao Sumativa
+5 utilizadores -> 85%
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Para este terceiro bakeoff decidimos começar o processo de geração de ideias no jamboard disponibilizado pela google. Aqui discutimos
+multiplas ideias de possiveis layouts para teclados como alfabetico, qwerty ou dvorak e tambem formas de introduzir um autocomplete
+para tornar o processo de escrita mais eficiente.
+
+(1ª Iteracao)
+Para a 1ª iteração decidimos alterar o layout para um teclado em que fosse possivel ver todas as letras ao mesmo tempo, 
+dividindo o menu principal em 3 zonas com 8 ou 9 caracteres, que correspondiam aos submenus do alfabeto.
+Além disso, tornámos a introdução do espaço e do "backspace" mais rápida e direta que no protótipo base.
+Realizamos um conjunto de testes junto de 12 utilizadores todos alunos de IPM em que obtivemos os seguintes resultados:
+Fizemos um defriefing com alguns dos participantes em que obtivemos feedback acerca da experiência de utilização e da rapidez de escrita.
+
+
+(2ª Iteracao)
+Na segunda iteração decidimos mudar o sitio do DELETE e do SPACE visto que tinham hitboxes demasiado pequenas e alguns utilizadores 
+reportaram selecionar incorretamente as caixas das letras ao tentar apagar uma letra ou dar espaço. Assim, foram movidas para a lateral do
+ecrã com uma hitbox maior. Para acomodar esta alteracao o teclado passou a ser divido em 4 caixas tendo em mente principios como
+o subitizing diminuindo o numero de letras por caixa para aumentar a velocidade de reconhecimento.
+Foi também nesta iteração que implementamos um autocomplete. Este previa a palavra que o utilizador estava a escrever com base
+numa lista de palavras mais comuns. Para escolher uma das sugestões, bastava clicar no botão apropriado e escolher um dos botões.
+Além disso foi adicionado mais uma medida de performance ao ecrã final, o CPM que media o numero de caracteres por minuto.
+Após outra rodada de testes com 19 utilizadores durante a simulação do bakeoff obtivemos os seguintes valores:
+A média de palavras por minuto subiu, o que mostrou que as alterações tiveram um efeito positivo. No entanto, o desvio padrão sofreu um grande aumento.
+Isto pode ser justificado com diferentes de níveis de afinidade com o layout do teclado, e fatores aleatórios, como a facilidade de cada palavra
+pretendida ser sugerida pelo autocomplete.
+
+
+(3ª Iteracao)
+Da 2ª iteração, recebemos feedback no sentido de tornarmos o formato do teclado mais familiar.
+Como tal, para a 3ª iteração, decidimos implementar um layout mais tradicional, com 3 a 4 letras por zona, à semelhança dos telemóveis antigos.
+Cada zona permite abrir um submenu, no qual também é possível aceder às outras opções do menu principal, como, por exemplo, o autocomplete,
+que foi alterado para permitir uma escolha imediata de entre as 2 sugestões.
+A redução de 3 sugestões para 2 foi feita para permitir uma leitura mais fácil ao utilizador.
+(Além disso, ao testar o protótipo anterior, reparámos que palavras mais longas saíam do ecrã, o que foi corrigido neste protótipo)
+Nesta ronda final, testámos 11 utilizadores diferentes, e obtivemos os seguintes resultados.
+O valor médio de palavras por minuto aumentou de novo, apesar de alguns resultados muito acima da média terem levado a um aumento do desvio padrão.
+Tal como na 2ª iteração, os resultados podem facilmente variar em função de quão rapidamente a palavra que se quer escrever aparecer no autocomplete.
+
+Infelizmente, devido a restrições de tempo, não nos foi possível avançar para uma 4ª iteração e, assim,
+refinar o nosso protótipo, pelo que este foi o apresentado no bake-off.
